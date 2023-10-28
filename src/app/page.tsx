@@ -1,12 +1,9 @@
-import Image from 'next/image'
-import Sidebar from './components/Sidebar'
+import About from "./components/About";
 
 export default function Home() {
   return (
-    <main>
-      <div>
-        <Sidebar />
-      </div>
-    </main>
-  )
+    <>
+      <About />
+    </>
+  );
 }
