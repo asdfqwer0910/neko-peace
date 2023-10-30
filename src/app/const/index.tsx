@@ -11,3 +11,27 @@ export const NEWS_DATA = [
     { href: '/', key: 'date1', label1: '2023/10/27', label2: 'サイトオープンしました' },
     { href: '/', key: 'date2', label1: '2023/10/30', label2: '開発中＞＜ がんばります＞＜；' },
 ];
+
+export const FOOTER_LINKS = [
+    {
+        title: 'ねこぴーすについて',
+        links: [
+            '会社概要',
+            '採用情報',
+            'プレスリリース',
+        ],
+    },
+    {
+        title: 'ヘルプ' ,
+        links: [
+            'お問い合わせ',
+        ],
+    },
+    {
+        title: 'プライバシーと利用規約',
+        links: [
+            'プライバシーポリシー',
+            '利用規約',
+        ],
+    },
+];

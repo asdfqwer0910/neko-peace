@@ -124,7 +124,7 @@
   
     /* Hero */
     .about-map {
-      @apply absolute left-0 right-0 top-0 h-screen w-screen bg-pattern-2 bg-cover bg-center -top-60;
+      @apply absolute right-0 top-0 h-screen w-screen bg-pattern-2 bg-cover bg-center;
     }
   
     /* Camp */
