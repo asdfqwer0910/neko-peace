@@ -1,4 +1,6 @@
+import { createClient } from '@supabase/supabase-js'
 
+const supabase = createClient('https://reahvokhwbxlfxbcuupo.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJlYWh2b2tod2J4bGZ4YmN1dXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTg4MDU0MDcsImV4cCI6MjAxNDM4MTQwN30.3PyWMmFoqnQn6uwvf2AhWEDvrhfL5PK4IcsJvLi2p10')
 
 const CatCard = () => {
   return (
