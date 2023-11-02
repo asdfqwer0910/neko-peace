@@ -35,3 +35,30 @@ export const FOOTER_LINKS = [
         ],
     },
 ];
+
+export const CAT_CARD = [
+    {
+        key: '1',
+        catName: 'うずめ',
+        breed: 'ミックス',
+        birth: '2023/08/23',
+        sex: 'メス',
+        detail: '生後2カ月程、とてもお利口さんです。',
+    },
+    {
+        key: '2',
+        catName: 'ジョウ',
+        breed: 'アメリカンショートヘアー',
+        birth: '2021/12/08',
+        sex: 'オス',
+        detail: 'かっこいいよ、ジョウ君',
+    },
+    {
+        key: '3',
+        catName: 'タマ',
+        breed: 'ミックス',
+        birth: '2023/02/27',
+        sex: 'オス',
+        detail: 'とても穏やかな性格で人懐っこいです。',
+    },
+];
