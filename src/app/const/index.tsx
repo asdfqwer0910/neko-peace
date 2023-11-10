@@ -51,7 +51,7 @@ export const CAT_CARD = [
         breed: 'アメリカンショートヘアー',
         birth: '2021/12/08',
         sex: 'オス',
-        detail: 'かっこいいよ、ジョウ君',
+        detail: 'かっこいい',
     },
     {
         key: '3',
@@ -60,5 +60,21 @@ export const CAT_CARD = [
         birth: '2023/02/27',
         sex: 'オス',
         detail: 'とても穏やかな性格で人懐っこいです。',
+    },
+    {
+        key: '4',
+        catName: 'タマ',
+        breed: 'ミックス',
+        birth: '2023/02/27',
+        sex: 'オス',
+        detail: 'とても穏やかな性格で人懐っこいです。',
+    },
+    {
+        key: '5',
+        catName: 'ずみん',
+        breed: 'ミックス',
+        birth: '2023/02/27',
+        sex: 'オス',
+        detail: '野次馬',
     },
 ];
