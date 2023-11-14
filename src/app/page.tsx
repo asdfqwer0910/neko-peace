@@ -1,7 +1,9 @@
 import About from "./components/About";
 import News from "./components/News";
 
-export default function Home() {
+const Home = async () => {
+
+
   return (
     <>
       <About />
@@ -9,3 +11,5 @@ export default function Home() {
     </>
   );
 }
+
+export default Home
