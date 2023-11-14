@@ -48,7 +48,7 @@ const Profile = () => {
     })
 
     // アバター画像取得
-    useEffect(() =>{
+    useEffect(() => {
         if (user && user.avatar_url) {
             setAvatarUrl(user.avatar_url)
         }
@@ -87,6 +87,8 @@ const Profile = () => {
 
         try {
             let avatar_url = user.avatar_url
+
+            console.log(avatar_url)
 
             if (avatar) {
                 // supabaseに画像アップ
