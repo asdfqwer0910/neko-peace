@@ -152,7 +152,7 @@ const Profile = () => {
             <h2 className="text-center text-2xl font-bold">プロフィール</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex flex-col justify-center items-center mb-10">
-                    <Image src={avatarUrl} className="rounded-full object-cover" alt="avatar" width={150} height={150} />
+                    <Image src={avatarUrl} className="border-2 rounded-full object-cover" alt="avatar" width={150} height={150} />
                     <div className="mt-5">
                         <input type="file" id="avatar" onChange={uploadImage} />
                         {fileMessage && <div className="my-3 text-red-500">{fileMessage}</div>}

@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { NAV_LINKS } from "../const";
+import { DROPDOWN, NAV_LINKS } from "../const";
 import Button from "./Button";
 import type { Session } from "@supabase/auth-helpers-nextjs";
 import type { Database } from "../../../lib/database.types";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useStore from "../../../store";
 type ProfileType = Database['public']['Tables']['profiles']['Row']
 
@@ -30,10 +30,13 @@ const NavBar = ({
     })
   }, [session, setUser, profile])
 
+  const [ isOpen, setIsOpen ] = useState(false)
+  const [ menuOpen, setMenuOpen ] = useState(false)
+
   return (
   <nav className="flexBetween padding-container relative z-30 py-5 shadow">
     <Link href="/">
-      <Image src="/ねこぴーす.svg" alt="" width={74} height={29} className="mx-10" />
+      <Image src="/ねこぴーす.svg" alt="" width={74} height={29} className="xl:mx-24" />
     </Link>
 
     <ul className="hidden h-full gap-12 lg:flex">
@@ -46,15 +49,36 @@ const NavBar = ({
     
     {session ?
     <div className="lg:flexCenter hidden">
-      <Link href="/settings/profile">
+      <button onClick={() => setIsOpen((prev) => !prev)}>
         <Image 
           src={profile && profile.avatar_url ? profile.avatar_url : '/default.svg'}
-          className="rounded-full object-cover mx-10"
+          className="border-2 rounded-full object-cover xl:mx-24"
           alt="avatar"
           width={50}
           height={50}
         />
-      </Link>
+      </button>
+
+      {isOpen && (
+        <div className="absolute top-20 flex flex-col py-2 border rounded bg-white">
+          {DROPDOWN.map((link) => (
+            <Link href={link.href} className="py-2 px-3 font-semibold hover:bg-blue-600 hover:text-white">
+                <Image 
+                  src={link.image}
+                  alt="icon"
+                  width={23}
+                  height={23}
+                  className="inline-block mr-2"
+                />
+                {link.label}
+            </Link>
+          ))}
+        </div>
+      )}
+
+      <ul className="md:hidden bg-white absolute w-full h-full bottom-0">
+
+      </ul>
     </div>
     :
     <div className="lg:flexCenter hidden mx-10">
@@ -66,14 +90,6 @@ const NavBar = ({
       />
     </div>
     }
-
-    <Image 
-      src="/Menu.svg"
-      alt="menu"
-      width={32}
-      height={32}
-      className="inline-block cursor-pointer lg:hidden"
-    />
   </nav>
   )
 }
