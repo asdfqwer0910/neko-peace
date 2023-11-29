@@ -4,6 +4,7 @@ import { cookies } from "next/headers"
 import AdoptionPost from "../components/AdoptionPost"
 import PagePagination from "../components/PagePagination"
 import { SearchType } from "../components/type"
+import AdoptionImage from "../components/AdoptionImage"
 
 // ページネーション
 const getPagination = (page: number, size: number) => {
@@ -47,6 +48,7 @@ const page = async ({ searchParams }: SearchType) => {
 
   return (
     <div>
+      <AdoptionImage />
       <div className="grid grid-cols-3 gap-5 mb-10">
         {postData.map((post, index) => {
           return <AdoptionPost key={index} post={post} />

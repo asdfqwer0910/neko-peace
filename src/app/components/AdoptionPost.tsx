@@ -15,7 +15,7 @@ const AdoptionPost = ({ post }: { post: PostWithProfileType; }) => {
     const date = formatDistance(createdAt, now, { addSuffix: true, locale: ja })
 
     return (
-        <div className='flex m-12'>
+        <div className='flex justify-center mt-24'>
             {/* カード */}
             <Link href={`/adoption/${post.id}`}>
             <div className="w-[320px] h-[390px] overflow-hidden text-black border-2 hover:border-2 hover:border-blue-400 hover:bg-gray-50 hover:bg-opacity-70 hover:shadow-md rounded-3xl group">
