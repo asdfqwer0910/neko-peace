@@ -1,16 +1,14 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import Profile from "@/app/components/Profile";
-
 import type { Database } from "../../../../lib/database.types";
+import InsertAdoption from "@/app/components/InsertAdoption";
 
-const ProfilePage = async () => {
+const InsertAdoptionPage = async () => {
     const supabase = createServerComponentClient<Database>({
         cookies,
     })
 
-    // セッション取得
     const {
         data: { session },
     } = await supabase.auth.getSession()
@@ -20,8 +18,8 @@ const ProfilePage = async () => {
     }
 
     return (
-        <Profile />
+        <InsertAdoption />
     )
 }
 
-export default ProfilePage
+export default InsertAdoptionPage

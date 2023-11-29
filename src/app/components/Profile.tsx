@@ -88,8 +88,6 @@ const Profile = () => {
         try {
             let avatar_url = user.avatar_url
 
-            console.log(avatar_url)
-
             if (avatar) {
                 // supabaseに画像アップ
                 const { data: storageData, error: storageError } = await supabase.storage

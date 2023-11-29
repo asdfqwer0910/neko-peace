@@ -34,9 +34,9 @@ const NavBar = ({
   const [ menuOpen, setMenuOpen ] = useState(false)
 
   return (
-  <nav className="flexBetween padding-container relative z-30 py-5 shadow">
+  <nav className="flexBetween padding-container relative z-30 py-5 h-[90px] shadow">
     <Link href="/">
-      <Image src="/ねこぴーす.svg" alt="" width={74} height={29} className="xl:mx-24" />
+      <Image src="/ねこぴーす.svg" alt="" width={74} height={29} className="md:mx-12 xl:mx-24" />
     </Link>
 
     <ul className="hidden h-full gap-12 lg:flex">
