@@ -47,7 +47,7 @@ const page = async ({ searchParams }: SearchType) => {
 
   return (
     <div>
-      <div className="flex flex-wrap grid-rows-3 justify-around">
+      <div className="grid grid-cols-3 gap-5 mb-10">
         {postData.map((post, index) => {
           return <AdoptionPost key={index} post={post} />
         })}

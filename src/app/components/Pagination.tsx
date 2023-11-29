@@ -20,7 +20,7 @@ const Pagination = ({ allCnt, perPage, clickPagenation }: PaginationType) => {
                 marginPagesDisplayed={1}
                 pageRangeDisplayed={2}
                 onPageChange={clickPagenation}
-                containerClassName={'z-0 inline-flex rounded -space-x-px text-sm bg-white'}
+                containerClassName={'mb-10 z-0 inline-flex rounded -space-x-px text-sm bg-white'}
                 pageLinkClassName={'border border-gray-100 hover:bg-yellow-500 hover:text-white inline-flex items-center'}
                 activeClassName={'z-10 bg-blue-200 text-white border border-blue-200 inline-flex items-center'}
                 breakLinkClassName={'inline-flex items-center px-3 py-2 border border-gray-100'}
