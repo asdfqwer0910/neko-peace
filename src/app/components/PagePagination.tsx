@@ -13,7 +13,7 @@ const PagePagination = ({ allCnt, perPage }: PageProps) => {
     const router = useRouter()
 
     const paginationHandler = ({ selected }: { selected: number }): void => {
-        router.push(`/?page=${selected + 1}`)
+        router.push(`/adoption/?page=${selected + 1}`)
     }
 
     return <Pagination allCnt={allCnt} perPage={perPage} clickPagenation={paginationHandler} />
