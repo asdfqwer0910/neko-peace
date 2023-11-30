@@ -18,7 +18,7 @@ const AdoptionPost = ({ post }: { post: PostWithProfileType; }) => {
         <div className='flex justify-center mt-24'>
             {/* カード */}
             <Link href={`/adoption/${post.id}`}>
-            <div className="w-[320px] h-[390px] overflow-hidden text-black border-2 hover:border-2 hover:border-blue-400 hover:bg-gray-50 hover:bg-opacity-70 hover:shadow-md rounded-3xl group">
+            <div className="w-[320px] h-[390px] overflow-hidden text-black border-2 hover:border-2 hover:border-blue-400 hover:bg-gray-50 hover:bg-opacity-70 hover:shadow-md rounded-3xl group animate-scale-up-center">
                 <div className="relative w-full h-[200px]">
                     <Image 
                         src={post.image_url ? post.image_url: '/noimage.png'}

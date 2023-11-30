@@ -13,8 +13,8 @@ const Pagination = ({ allCnt, perPage, clickPagenation }: PaginationType) => {
     return (
         <>
             <ReactPaginate 
-                previousLabel={<Image src={'/ChevronLeft.svg'} alt="left" fill className="h-5 w-5" />}
-                nextLabel={<Image src={'/ChevronRight.svg'} alt="right" fill className="h-5 w-5" />}
+                previousLabel={<div className="relative w-5 h-5"><Image src={'/ChevronLeft.svg'} alt="left" fill /></div>}
+                nextLabel={<div className="relative w-5 h-5"><Image src={'/ChevronRight.svg'} alt="right" fill /></div>}
                 breakLabel={'...'}
                 pageCount={Math.ceil(allCnt / perPage)}
                 marginPagesDisplayed={1}

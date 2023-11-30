@@ -31,17 +31,19 @@ const NavBar = ({
   }, [session, setUser, profile])
 
   const [ isOpen, setIsOpen ] = useState(false)
-  const [ menuOpen, setMenuOpen ] = useState(false)
+  console.log(isOpen)
 
   return (
-  <nav className="flexBetween padding-container relative z-30 py-5 h-[90px] shadow">
-    <Link href="/">
-      <Image src="/ねこぴーす.svg" alt="" width={74} height={29} className="md:mx-12 xl:mx-24" />
-    </Link>
+  <nav className="flexBetween px-6 lg:px-20 xl:px-20 relative z-30 py-5 h-[90px] shadow">
+    <div className="relative w-32 h-full">
+      <Link href="/">
+        <Image src="/Logo.svg" alt="logo" fill />
+      </Link>
+    </div>
 
     <ul className="hidden h-full gap-12 lg:flex">
       {NAV_LINKS.map((link) => (
-        <Link href={link.href} key={link.key} className="regular-16 text-gray-500 flexCenter cursor-pointer pb-1.5 transition-all hover:font-bold">
+        <Link href={link.href} key={link.key} className="regular-16 text-gray-500 flexCenter cursor-pointer pb-1.5 transition-all hover:font-bold hover:text-orange-400 hover:text-[18px]">
           {link.label}
         </Link>
       ))}
@@ -50,17 +52,18 @@ const NavBar = ({
     {session ?
     <div className="lg:flexCenter hidden">
       <button onClick={() => setIsOpen((prev) => !prev)}>
-        <Image 
-          src={profile && profile.avatar_url ? profile.avatar_url : '/default.svg'}
-          className="border-2 rounded-full object-cover xl:mx-24"
-          alt="avatar"
-          width={50}
-          height={50}
-        />
+        <div className="relative w-12 h-12">
+          <Image 
+            src={profile && profile.avatar_url ? profile.avatar_url : '/default.svg'}
+            className="border-2 rounded-full object-cover"
+            alt="avatar"
+            fill
+          />
+        </div>
       </button>
 
       {isOpen && (
-        <div className="absolute top-20 flex flex-col py-2 border rounded bg-white">
+        <div className='absolute top-20 flex flex-col py-2 border rounded bg-white animate-scale-up-ver-top'>
           {DROPDOWN.map((link) => (
             <Link href={link.href} className="py-2 px-3 font-semibold hover:bg-blue-600 hover:text-white">
                 <Image 
