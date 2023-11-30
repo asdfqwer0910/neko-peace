@@ -21,6 +21,7 @@ const config: Config = {
         "tracking-in-expand": "tracking-in-expand 1.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) 2.3s  both",
         "scale-up-ver-top": "scale-up-ver-top 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000)   both",
         "scale-out-ver-top": "scale-out-ver-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530)   both",
+        "scale-up-center": "scale-up-center 1s cubic-bezier(0.390, 0.575, 0.565, 1.000)  both",
       },
       keyframes: {
           "tracking-in-contract-bck": {
@@ -79,6 +80,14 @@ const config: Config = {
               transform: "scaleY(0)",
               "transform-origin": "100% 0%",
               opacity: "1"
+          }
+        },
+        "scale-up-center": {
+          "0%": {
+              transform: "scale(.5)"
+          },
+          to: {
+              transform: "scale(1)"
           }
         },
       }
