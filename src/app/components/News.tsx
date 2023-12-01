@@ -9,7 +9,7 @@ const News = () => {
         <h1 className="font-bold text-3xl pb-12 text-center">最新ニュース</h1>
           {NEWS_DATA.map((link) => (
             <Link href={link.href} key={link.key}>
-            <ul className="h-full gap-24 justify-start lg:flex border-b-2 px-12 cursor-pointer hover:bg-gray-100">
+            <ul className="h-full gap-24 justify-start lg:flex border-b-2 px-12 cursor-pointer hover:bg-gray-100 hover:border-orange-400">
               <li className="regular-18 py-4">
                 {link.label1}
               </li>

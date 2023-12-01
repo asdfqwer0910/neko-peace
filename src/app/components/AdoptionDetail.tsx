@@ -5,6 +5,9 @@ import { PostWithProfileType } from "./type"
 import Image from "next/image"
 import Link from "next/link"
 import { ja } from "date-fns/locale"
+import { useEffect, useState } from "react"
+import useStore from "../../../store"
+import Loading from "../loading"
 
 // 譲渡猫の投稿詳細
 const AdoptionDetail = ({
@@ -13,6 +16,40 @@ const AdoptionDetail = ({
     post: PostWithProfileType
 }) => {
     const birth = format(new Date(post.birth ? post.birth : ''), 'yyyy年MM月dd日', { locale: ja });
+    const { user } = useStore()
+    const [loading, setLoading] = useState(false)
+    const [myPost, setMyPost] = useState(false)
+    const [login, setLogin] = useState(false)
+
+    useEffect(() => {
+        // ログインしているかチェック
+        if (user.id != '') {
+            setLogin(true)
+
+            if (user.id === post.profile_id) {
+                setMyPost(true)
+            }
+        }
+    }, [user])
+
+    const renderButton = () => {
+        if (myPost) {
+            return (
+                <div className="flex justify-end">
+                    {loading ? (
+                        <Loading />
+                    ): (
+                        <div className="flex items-center space-x-2">
+                            <Link href={`/adoption/${post.id}/edit`}>
+                                <button className="group flex relative w-full justify-center border-transparent p-2 rounded-md font-bold text-white bg-orange-400">編集</button>
+                            </Link>
+                        </div>
+                    )
+                    }
+                </div>
+            )
+        }
+    }
 
     return (
         <div className="flex justify-around my-20 mx-52">
@@ -56,6 +93,7 @@ const AdoptionDetail = ({
                             {post.detail}
                         </div>
                     </div>
+                    {renderButton()}
                 </div>
             </div>
         </div>
