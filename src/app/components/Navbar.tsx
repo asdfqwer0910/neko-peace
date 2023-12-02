@@ -84,7 +84,7 @@ const NavBar = ({
       </ul>
     </div>
     :
-    <div className="lg:flexCenter hidden mx-10">
+    <div className="lg:flexCenter hidden">
       <Button
         type="button"
         title="ログイン"
