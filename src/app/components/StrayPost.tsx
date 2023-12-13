@@ -1,15 +1,17 @@
 'use client'
 
-import { format, formatDistance } from "date-fns"
-import { PostWithProfileType } from "./type"
+import { ja } from "date-fns/locale"
 import Image from "next/image"
 import Link from "next/link"
-import { ja } from "date-fns/locale"
+import { StrayWithProfileType } from "./type"
+import { format, formatDistance } from "date-fns"
+import React from "react"
 
 // 投稿
-const AdoptionPost = ({ post }: { post: PostWithProfileType; }) => {
+const StrayPost = ({ post }: { post: StrayWithProfileType; }) => {
     const createdAt = new Date(post.created_at)
-    const birth = format(new Date(post.birth ? post.birth : ''), 'yyyy年MM月dd日', { locale: ja });
+    const birth = format(new Date(post.birth ? post.birth : ''), 'yyyy年MM月dd日', { locale: ja })
+    const lostDay = format(new Date(post.lost_day ? post.lost_day : ''), 'yyyy年MM月dd日', { locale: ja })
     const now = new Date()
     // 投稿日時
     const date = formatDistance(createdAt, now, { addSuffix: true, locale: ja })
@@ -17,8 +19,8 @@ const AdoptionPost = ({ post }: { post: PostWithProfileType; }) => {
     return (
         <div className='flex justify-center mt-24'>
             {/* カード */}
-            <Link href={`/adoption/${post.id}`}>
-            <div className="w-[390px] h-[500px] overflow-hidden text-black border-2 hover:border-2 hover:border-blue-400 hover:bg-gray-50 hover:bg-opacity-70 hover:shadow-md rounded-3xl  animate-scale-up-center">
+            <Link href={`/stray/${post.id}`}>
+            <div className="w-[390px] h-[535px] overflow-hidden text-black border-2 hover:border-2 hover:border-blue-400 hover:bg-gray-50 hover:bg-opacity-70 hover:shadow-md rounded-3xl  animate-scale-up-center">
                 <div className="relative w-full h-[300px]">
                     <Image 
                         src={post.image_url ? post.image_url: '/noimage.png'}
@@ -37,9 +39,13 @@ const AdoptionPost = ({ post }: { post: PostWithProfileType; }) => {
                     <div className="text-sm items-center text-gray-500">
                         {post.pedigree}
                     </div>
-                    <div className="text-sm items-center text-gray-500">
-                        {birth}
+                    <div className="text-md items-center font-semibold mt-1 text-gray-500">
+                        {lostDay}に迷子になりました
                     </div>
+                    <div className="text-md items-center font-semibold text-gray-500">
+                        {post.address} 付近
+                    </div>
+                    
                 </div>
                 <div className="flex px-6 justify-start">
                     <div className="flex items-end">
@@ -67,4 +73,4 @@ const AdoptionPost = ({ post }: { post: PostWithProfileType; }) => {
     )
 }
 
-export default AdoptionPost
+export default StrayPost

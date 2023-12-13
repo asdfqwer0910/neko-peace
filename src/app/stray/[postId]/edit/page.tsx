@@ -1,7 +1,8 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
 import type { Database } from "../../../../../lib/database.types"
 import { cookies } from "next/headers"
-import AdoptionEdit from "@/app/components/AdoptionEdit"
+import StrayEdit from "@/app/components/StrayEdit"
+
 
 type PageProps = {
     params: {
@@ -9,25 +10,24 @@ type PageProps = {
     }
 }
 
-// 編集ページ
-const AdoptionEditPage = async ({ params }: PageProps) => {
+// 迷子情報の編集ページ
+const StrayEditPage = async ({ params }: PageProps) => {
     const supabase = createServerComponentClient<Database>({
         cookies,
     })
 
-    // 保護猫情報取得
     const { data: postData } = await supabase
-        .from('adoption')
+        .from('stray')
         .select()
         .eq('id', params.postId)
         .single()
 
     // 投稿が見つからない場合
-    if(!postData) {
+    if (!postData) {
         return <div className="text-center">投稿が見つかりません</div>
     }
 
-    return <AdoptionEdit adoption={postData} />
+    return <StrayEdit stray={postData} />
 }
 
-export default AdoptionEditPage
+export default StrayEditPage

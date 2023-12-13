@@ -11,6 +11,7 @@ const config: Config = {
       backgroundImage: {
         'pattern-2': "url('/Home.JPG')",
         'adoption-banner': "url('/Adoption.JPG')",
+        'stray-banner': "url('/Stray.JPG')",
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',

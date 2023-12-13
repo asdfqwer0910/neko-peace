@@ -1,6 +1,7 @@
 import type { Database } from "../../../lib/database.types";
 
 export type PostType = Database['public']['Tables']['adoption']['Row']
+export type StrayType = Database['public']['Tables']['stray']['Row']
 
 type PostProfileType = {
     profiles: {
@@ -10,6 +11,7 @@ type PostProfileType = {
 }
 
 export type PostWithProfileType = PostType & PostProfileType
+export type StrayWithProfileType = StrayType & PostProfileType
 
 export interface SearchType {
     searchParams: {

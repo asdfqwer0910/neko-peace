@@ -5,22 +5,24 @@ import { useRouter } from "next/navigation"
 import Loading from "../loading"
 import useStore from "../../../store"
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
-import { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import Image from "next/image"
 import { PEDIGREE, SEX } from "../const"
-import { PostWithProfileType } from "./type"
+import { StrayWithProfileType } from "./type"
 type Schema = z.infer<typeof schema>
-type Adoption = Database['public']['Tables']['adoption']['Row']
+type Stray = Database['public']['Tables']['stray']['Row']
 
 type PageProps = {
-    adoption: Adoption
+    stray: Stray
 }
 
 // バリデーション定義
 const schema = z.object({
+    lost_day: z.string(),
+    address: z.string().min(1, { message: '必ず入力してください' }),
     catname: z.string().min(1, { message: '必ず入力してください' }),
     pedigree: z.string().min(1, { message: '必ず入力してください' }),
     birth: z.string(),
@@ -28,10 +30,10 @@ const schema = z.object({
     detail: z.string(),
 })
 
-const AdoptionEdit = ({ adoption }: PageProps) => {
+const StrayEdit = ({ stray }: PageProps) => {
     const supabase = createClientComponentClient<Database>()
     const router = useRouter()
-    const { user } = useStore()
+    const { user }  = useStore()
     const [loading, setLoading] = useState(false)
     const [image, setImage] = useState<File>(null!)
     const [myPost, setMyPost] = useState(false)
@@ -40,9 +42,9 @@ const AdoptionEdit = ({ adoption }: PageProps) => {
 
     useEffect(() => {
         // 自分の投稿かチェック
-        if (user.id !== adoption.profile_id) {
+        if (user.id !== stray.profile_id) {
             // 他人の投稿の場合は投稿詳細に遷移する
-            router.push(`/adoption/${adoption.id}`)
+            router.push(`/stray/${stray.id}`)
         } else {
             setMyPost(true)
         }
@@ -55,11 +57,13 @@ const AdoptionEdit = ({ adoption }: PageProps) => {
     } = useForm({
         // 初期値
         defaultValues: {
-            catname: adoption.catname,
-            pedigree: adoption.pedigree,
-            birth: adoption.birth ? adoption.birth: '',
-            sex: adoption.sex,
-            detail: adoption.detail ? adoption.detail: '',
+            lost_day: stray.lost_day,
+            address: stray.address,
+            catname: stray.catname,
+            pedigree: stray.pedigree,
+            birth: stray.birth ? stray.birth: '',
+            sex: stray.sex,
+            detail: stray.detail ? stray.detail: '',
         },
         // バリデーション
         resolver: zodResolver(schema),
@@ -97,13 +101,13 @@ const AdoptionEdit = ({ adoption }: PageProps) => {
         setMessage('')
 
         try {
-            let image_url = adoption.image_url
+            let image_url = stray.image_url
 
             if (user.id) {
                 if (image) {
                     // supabaseストレージに画像アップ
                     const { data: storageData, error: storageError } = await supabase.storage
-                    .from('adoption_photos')
+                    .from('stray_photos')
                     .upload(`${user.id}/${uuidv4()}`, image)
     
                 if (storageError) {
@@ -116,13 +120,13 @@ const AdoptionEdit = ({ adoption }: PageProps) => {
                     const fileName = image_url.split('/').slice(-1)[0]
                     // 古い画像を削除する
                     await supabase.storage
-                    .from('adoption_photos')
+                    .from('stray_photos')
                     .remove([`${user.id}/${fileName}`])
                 }
 
                 // 画像URL取得
                 const { data: urlData } = await supabase.storage
-                    .from('adoption_photos')
+                    .from('stray_photos')
                     .getPublicUrl(storageData.path)
     
                 image_url = urlData.publicUrl
@@ -133,8 +137,10 @@ const AdoptionEdit = ({ adoption }: PageProps) => {
         
         // アップデート
         const { error: updateError } = await supabase
-        .from('adoption')
+        .from('stray')
         .update({
+            lost_day: data.lost_day,
+            address: data.address,
             catname: data.catname,
             pedigree: data.pedigree,
             birth: data.birth,
@@ -142,7 +148,7 @@ const AdoptionEdit = ({ adoption }: PageProps) => {
             detail: data.detail,
             image_url,
         })
-        .eq('id', adoption.id)
+        .eq('id', stray.id)
 
         // エラーチェック
         if (updateError) {
@@ -151,7 +157,7 @@ const AdoptionEdit = ({ adoption }: PageProps) => {
         }
         
         // 投稿詳細に移動
-        router.push(`/adoption/${adoption.id}`)
+        router.push(`/stray/${stray.id}`)
         router.refresh()
 
         } catch (error) {
@@ -162,7 +168,6 @@ const AdoptionEdit = ({ adoption }: PageProps) => {
             router.refresh()
         }
     }
-
     // ユーザーの投稿を表示
     const renderPost = () => {
         if(myPost) {
@@ -170,7 +175,7 @@ const AdoptionEdit = ({ adoption }: PageProps) => {
                 <div className="flex justify-around my-20 mx-52">
                     <div className="relative w-[450px] h-[500px]">
                         <Image 
-                            src={adoption.image_url ? adoption.image_url: '/noimage.png'}
+                            src={stray.image_url ? stray.image_url: '/noimage.png'}
                             className="rounded-md object-cover"
                             alt="image"
                             fill
@@ -226,10 +231,10 @@ const AdoptionEdit = ({ adoption }: PageProps) => {
                             </select>
                         </div>
                         <div className="flex-row">
-                            <p className="font-bold">猫ちゃんの性格や特徴</p>
+                            <p className="font-bold">猫ちゃんの特徴</p>
                             <textarea
                                 autoComplete="none" 
-                                placeholder="猫ちゃんの性格や特徴などを記入してください" 
+                                placeholder="猫ちゃんの特徴を記入してください" 
                                 id="detail" 
                                 className="relative appearance-none rounded-md border block w-full px-3 py-3"
                                 {...register('detail', { required: true })}
@@ -258,4 +263,4 @@ const AdoptionEdit = ({ adoption }: PageProps) => {
     return <>{renderPost()}</>
 }
 
-export default AdoptionEdit
+export default StrayEdit

@@ -109,7 +109,7 @@ const Login = () => {
             </div>
             <div className="mb-5">
                 <Link href="/auth/signup" className="flex items-center justify-center text-gray-500 hover:text-gray-700">
-                    アカウントをお持ちの方はこちら
+                    アカウントをお持ちでない方はこちら
                 </Link>
             </div>
         </div>
