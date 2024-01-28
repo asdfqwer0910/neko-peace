@@ -90,6 +90,83 @@ export interface Database {
           }
         ]
       }
+      chat_users: {
+        Row: {
+          chat_id: string
+          created_at: string
+          profile_id: string
+        }
+        Insert: {
+          chat_id: string
+          created_at?: string
+          profile_id: string
+        }
+        Update: {
+          chat_id?: string
+          created_at?: string
+          profile_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chat_users_chat_id_fkey"
+            columns: ["chat_id"]
+            isOneToOne: false
+            referencedRelation: "chats"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "chat_users_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      chats: {
+        Row: {
+          created_at: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+        }
+        Relationships: []
+      }
+      messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          profile_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id: string
+          profile_id?: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          profile_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       profiles: {
         Row: {
           address: string | null
@@ -183,7 +260,13 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_chat_users: {
+        Args: {
+          chat_id: string
+          profile_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never

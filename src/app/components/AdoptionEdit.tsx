@@ -179,7 +179,7 @@ const AdoptionEdit = ({ adoption }: PageProps) => {
                 <div className="flex justify-center border rounded-md p-6">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="flex flex-col w-[450px] space-y-12">
-                        <div className="flex">
+                        <div className="flex items-center">
                             <p className="font-bold w-[100px]">名前</p>
                             <input 
                                 type="text"
@@ -188,7 +188,7 @@ const AdoptionEdit = ({ adoption }: PageProps) => {
                                 {...register('catname', { required: true })}
                             />
                         </div>
-                        <div className="flex">
+                        <div className="flex items-center">
                             <p className="font-bold w-[100px]">生年月日</p>
                             <input 
                                 type="date"
@@ -197,11 +197,11 @@ const AdoptionEdit = ({ adoption }: PageProps) => {
                                 {...register('birth', { required: true })}
                             />
                         </div>
-                        <div className="flex">
+                        <div className="flex items-center">
                             <p className="font-bold w-[100px]">種類</p>
                             <select 
                                 id="pedigree"
-                                className="rounded-md border w-full px-3 py-3"
+                                className="rounded-md appearance-none border w-full px-3 py-3"
                                 {...register('pedigree', { required: true })}
                             >
                                 {PEDIGREE.map((pedi) => (
@@ -211,11 +211,11 @@ const AdoptionEdit = ({ adoption }: PageProps) => {
                                 ))}
                             </select>
                         </div>
-                        <div className="flex">
+                        <div className="flex items-center">
                             <p className="font-bold w-[100px]">性別</p>
                             <select 
                                 id="sex"
-                                className="relative appearance-none rounded-md border block w-full px-3 py-3"
+                                className="appearance-none rounded-md border w-full px-3 py-3"
                                 {...register('sex', { required: true })}
                             >
                                 {SEX.map((sex) => (
@@ -226,7 +226,7 @@ const AdoptionEdit = ({ adoption }: PageProps) => {
                             </select>
                         </div>
                         <div className="flex-row">
-                            <p className="font-bold">猫ちゃんの性格や特徴</p>
+                            <p className="font-bold mb-1">猫ちゃんの性格や特徴</p>
                             <textarea
                                 autoComplete="none" 
                                 placeholder="猫ちゃんの性格や特徴などを記入してください" 
